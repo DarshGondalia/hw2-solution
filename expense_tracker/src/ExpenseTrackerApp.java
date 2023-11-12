@@ -1,9 +1,10 @@
 import javax.swing.JOptionPane;
+
 import controller.ExpenseTrackerController;
 import model.ExpenseTrackerModel;
-import view.ExpenseTrackerView;
 import model.Filter.AmountFilter;
 import model.Filter.CategoryFilter;
+import view.ExpenseTrackerView;
 
 public class ExpenseTrackerApp {
 
@@ -36,6 +37,22 @@ public class ExpenseTrackerApp {
         JOptionPane.showMessageDialog(view, "Invalid amount or category entered");
         view.toFront();
       }
+    });
+
+    // Handle undo button clicks
+    view.getUndoBtn().addActionListener(e -> {
+      if (!model.isUndoStackEmpty()){
+        controller.undoTransaction();
+      }else{
+        JOptionPane.showMessageDialog(view, "No transactions to undo");
+        view.toFront();
+      }
+      
+    });
+
+    // Handle remove transaction button clicks
+    view.getRemoveTransactionBtn().addActionListener(e -> {
+      controller.handleSelectedRows();
     });
 
       // Add action listener to the "Apply Category Filter" button

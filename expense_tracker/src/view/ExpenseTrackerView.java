@@ -1,16 +1,25 @@
 package view;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.text.NumberFormat;
-
 import model.Transaction;
-
-import java.util.List;
 
 public class ExpenseTrackerView extends JFrame {
 
@@ -26,6 +35,9 @@ public class ExpenseTrackerView extends JFrame {
 
   private JTextField amountFilterField;
   private JButton amountFilterBtn;
+
+  private JButton undoBtn;
+  private JButton removeTransaction;
 
   
 
@@ -62,7 +74,9 @@ public class ExpenseTrackerView extends JFrame {
     amountFilterField = new JTextField(10);
     amountFilterBtn = new JButton("Filter by Amount");
   
-
+    // Undo Button functionality
+    undoBtn = new JButton("Undo recent");
+    removeTransaction = new JButton("Undo Selected Txns");
   
     // Layout components
     JPanel inputPanel = new JPanel();
@@ -75,7 +89,9 @@ public class ExpenseTrackerView extends JFrame {
     JPanel buttonPanel = new JPanel();
     buttonPanel.add(amountFilterBtn);
     buttonPanel.add(categoryFilterBtn);
-  
+    buttonPanel.add(undoBtn);
+    buttonPanel.add(removeTransaction);
+
     // Add panels to frame
     add(inputPanel, BorderLayout.NORTH);
     add(new JScrollPane(transactionsTable), BorderLayout.CENTER); 
@@ -171,6 +187,18 @@ public class ExpenseTrackerView extends JFrame {
 
   public JButton getAddTransactionBtn() {
     return addTransactionBtn;
+  }
+
+  public JButton getUndoBtn() {
+    return undoBtn;
+  }
+
+  public JButton getRemoveTransactionBtn() {
+    return removeTransaction;
+  }
+
+  public int[] getSelectedRows() {
+    return transactionsTable.getSelectedRows();
   }
 
 

@@ -1,7 +1,5 @@
 package controller;
 
-import view.ExpenseTrackerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +8,7 @@ import javax.swing.JOptionPane;
 import model.ExpenseTrackerModel;
 import model.Transaction;
 import model.Filter.TransactionFilter;
+import view.ExpenseTrackerView;
 
 public class ExpenseTrackerController {
   
@@ -51,6 +50,29 @@ public class ExpenseTrackerController {
     refresh();
     return true;
   }
+
+  public void undoTransaction(){
+    model.undo();
+    refresh();
+  }
+
+  public void handleSelectedRows() {
+    int[] selectedRows = view.getSelectedRows();
+    if (selectedRows.length > 0) {
+        for (int selectedRow : selectedRows) {
+            Transaction selectedTransaction = model.getTransactions().get(selectedRow);
+            // Display a confirmation dialog for each selected transaction
+            String d = "" + "\n" + selectedTransaction.getAmount() + "\n" + selectedTransaction.getCategory() + "\n" + selectedTransaction.getTimestamp(); 
+            int option = JOptionPane.showConfirmDialog(view,
+                    "Do you want to remove the selected transaction?" + d, "Confirm Removal",
+                    JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                model.removeTransaction(selectedTransaction);
+            }
+        }
+        refresh(); // Refresh the view after handling the selected rows
+    }
+}
 
   public void applyFilter() {
     //null check for filter
