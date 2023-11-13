@@ -30,3 +30,16 @@ ExpenseTrackerView.java
 ExpenseTrackerApp.java
 - Undo Btn action listener
 - Remove selected transaction action listener
+
+# Add test cases
+TestExample.java
+- Existing Test cases
+    - testAddTransaction
+    - testRemoveTransaction
+TestExample.java
+- testAddTransactionViewUpdate
+- testInvalidInputHandling
+- testFilterByAmount
+- testUndoAllowed
+- testUndoDisallowed
+- testFilterByCategory

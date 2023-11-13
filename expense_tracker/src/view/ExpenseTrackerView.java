@@ -127,7 +127,6 @@ public class ExpenseTrackerView extends JFrame {
     this.amountField = amountField;
   }
 
-  
   public String getCategoryField() {
     return categoryField.getText();
   }
@@ -221,6 +220,5 @@ public class ExpenseTrackerView extends JFrame {
 
       transactionsTable.repaint();
   }
-
 
 }
